@@ -238,10 +238,6 @@ configure arguments: --prefix=/usr/share/nginx --sbin-path=/usr/sbin/nginx --mod
 
 7.nginx丝滑升级
 
-![image-20230309110614616](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230309110614616.png)
-
-
-
 
 
 

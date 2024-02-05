@@ -242,10 +242,10 @@ systemctl stop apisix-dashboard
 
 ### 配置admin、viewer
 
-| key    | value       | md5密文                          |
-| ------ | ----------- | -------------------------------- |
-| admin  | cokutau@123 | 411BA738BFB32CDCA5FE7BFDC6F00E3B |
-| viewer | cokutau123  | D6D5E394F82B9EE54714021E0A053B15 |
+| key    | value | md5密文                          |
+| ------ | ----- | -------------------------------- |
+| admin  |       | 411BA738BFB32CDCA5FE7BFDC6F00E3B |
+| viewer |       | D6D5E394F82B9EE54714021E0A053B15 |
 
 
 

@@ -317,7 +317,7 @@ docker-machine -v
 
 - Service：Service 是 Kubernetes 最重要的资源对象。Kubernetes 中的 Service 对象可以对应微服务架构中的微服务。Service 定义了服务的访问入口，服务的调用者通过这个地址访问 Service 后端的 Pod 副本实例。Service 通过 Label Selector 同后端的 Pod 副本建立关系，Deployment 保证后端Pod 副本的数量，也就是保证服务的伸缩性。
 
-- ![k8s basic](https://www.k8stech.net/k8s-book/docs/images/k8s-basic.png)
+- ![k8s basic](..\images\k8s-basic.png)
 
   Kubernetes 主要由以下几个核心组件组成:
 

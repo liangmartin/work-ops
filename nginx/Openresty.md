@@ -94,7 +94,7 @@ nginx: configuration file /usr/local/openresty/nginx/conf/nginx.conf test is suc
 ```
 
 3、访问测试，用浏览器访问服务器的ip地址，如果出现如下内容，说明环境安装是没问题的
-[![luatest](http://www.fblinux.com/wp-content/uploads/2018/04/luatest.png)](http://www.fblinux.com/wp-content/uploads/2018/04/luatest.png)
+[![luatest](..\images\luatest.png)](http://www.fblinux.com/wp-content/uploads/2018/04/luatest.png)
 
 ## openresty 开启 response日志功能
 
@@ -163,19 +163,19 @@ nginx: configuration file /usr/local/openresty/nginx/conf/nginx.conf test is suc
 
 先来一个200请求，观察访问日志
 
-[![200access](http://www.fblinux.com/wp-content/uploads/2018/04/200access-1024x117.png)](http://www.fblinux.com/wp-content/uploads/2018/04/200access.png)
+[![200access](..\images\200access-1024x117.png)](http://www.fblinux.com/wp-content/uploads/2018/04/200access.png)
 
 此时看我们nginx的访问日志req_body 字段是没有数据记录。
 
-[![200log](http://www.fblinux.com/wp-content/uploads/2018/04/200log-1024x45.png)](http://www.fblinux.com/wp-content/uploads/2018/04/200log.png)
+[![200log](..\images\200log-1024x45.png)](http://www.fblinux.com/wp-content/uploads/2018/04/200log.png)
 
 我们在来一个404请求，观察是否会记录response信息
 
-[![404access](http://www.fblinux.com/wp-content/uploads/2018/04/404access-1024x351.png)](http://www.fblinux.com/wp-content/uploads/2018/04/404access.png)
+[![404access](..\images\404access-1024x351.png)](http://www.fblinux.com/wp-content/uploads/2018/04/404access.png)
 
 此时看我们nginx的访问日志req_body 字段，response信息被完整的记录下来，说明我们的配置是成功的
 
-[![404log](http://www.fblinux.com/wp-content/uploads/2018/04/404log-1024x102.png)](http://www.fblinux.com/wp-content/uploads/2018/04/404log.png)
+[![404log](..\images\404log-1024x102.png)](http://www.fblinux.com/wp-content/uploads/2018/04/404log.png)
 
 ## 后续
 

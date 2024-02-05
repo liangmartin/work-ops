@@ -24,8 +24,6 @@
 
 ## 普罗米修斯原理架构图
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/prometheus1)
-
 ##  组件介绍
 
 - **Prometheus Server**: 用于收集和存储时间序列数据。
@@ -93,14 +91,10 @@ echo "192.168.116.129 master
 
 上传prometheus-2.5.0.linux-amd64.tar.gz
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/20200113101351305.png)
-
 ```
 tar -zxvf prometheus-2.5.0.linux-amd64.tar.gz -C /usr/local/
 mv /usr/local/prometheus-2.5.0.linux-amd64/  /usr/local/prometheus
 ```
-
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/20200113101351306.png)
 
 直接使用默认配置文件启动
 
@@ -114,17 +108,11 @@ mv /usr/local/prometheus-2.5.0.linux-amd64/  /usr/local/prometheus
 ss -anltp | grep 9090
 ```
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/20200113101351307.png)
-
 ## ①、prometheus界面
 
 通过浏览器访问http://服务器IP:9090就可以访问到prometheus的主界面
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/20200113101351308.png)
-
 默认只监控了本机一台，点Status -->点Targets -->可以看到只监控了本 机
-
-![](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/20200113101351309.png)
 
 
 
@@ -132,21 +120,13 @@ ss -anltp | grep 9090
 
 ​	①为了避免时区的混乱，prometheus所有的组件内部都强制使用Unix时间，对外展示使用UTC时间。 如图
 
-![1600238613344](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/1600238613344.png)
-
 ​     2.16.0版本已经支持Prometheus Web UI选择本地时区了， 点击Try experimental React UI进去新UI ，如下：
-
-![1600239816667](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/1600239816667.png)
 
 ## ②、主机数据展示
 
 通过http://服务器IP:9090/metrics可以查看到监控的数据
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/2020082403)
-
 在web主界面可以通过关键字查询监控项
-
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/2020082404)
 
 ## ③、监控远程Linux主机
 
@@ -154,8 +134,6 @@ ss -anltp | grep 9090
 下载地址: <https://prometheus.io/download/>
 
 上传node_exporter-0.16.0.linux-amd64.tar.gz
-
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/20200113102232475.png)
 
 ```
 tar -zxvf node_exporter-0.16.0.linux-amd64.tar.gz -C /usr/local/
@@ -168,19 +146,13 @@ mv /usr/local/node_exporter-0.16.0.linux-amd64/ /usr/local/node_exporter
 nohup /usr/local/node_exporter/node_exporter & 
 ```
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/2020082405)
-
 确认端口(9100)
-
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/20200113102549361.png)
 
 **扩展: nohup命令: 如果把启动node_exporter的终端给关闭,那么进程也会 随之关闭。nohup命令会帮你解决这个问题。**
 
  
 
 ② 通过浏览器访问http://被监控端IP:9100/metrics就可以查看到 node_exporter在被监控端收集的监控信息
-
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/2020082406)
 
 ③ 回到prometheus服务器的配置文件里添加被监控机器的配置段
 
@@ -196,8 +168,6 @@ vim /usr/local/prometheus/prometheus.yml
    - targets: ['192.168.116.130:9100']
 ```
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/2020082407)
-
 ```
 - job_name: 'agent1'                   # 取一个job名称来代 表被监控的机器   
   static_configs:   
@@ -212,7 +182,7 @@ vim /usr/local/prometheus/prometheus.yml
 
 确认端口没有进程占用
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/2020082408)
+
 
 ```
 /usr/local/prometheus/prometheus --config.file="/usr/local/prometheus/prometheus.yml" &
@@ -220,11 +190,7 @@ vim /usr/local/prometheus/prometheus.yml
 
  确认端口被占用，说 明重启成功
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/2020082409)
-
 ④ 回到web管理界面 -->点Status -->点Targets -->可以看到多了一台监控目标
-
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/2020802410)
 
 **prometheus转成系统服务**
 
@@ -259,8 +225,6 @@ WantedBy=multi-user.target
 
 上传grafana-5.3.4-1.x86_64.rpm
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/20200113140643778.png)
-
 我这里选择的rpm包，下载后直接rpm -ivh安装就OK
 
 【失败原因缺少组件，可以yum安装组件】
@@ -269,15 +233,11 @@ WantedBy=multi-user.target
 rpm -ivh /root/Desktop/grafana-5.3.41.x86_64.rpm
 ```
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/grafana-2020082420)
-
 或者第二种方法【yum安装会自动安装缺少的组件的】
 
 ```
 yum localinstall -y grafana-5.3.4-1.x86_64.rpm 
 ```
-
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/20200113140902426.png)
 
 启动服务
 
@@ -290,43 +250,23 @@ systemctl enable grafana-server
 
 通过浏览器访问 http:// grafana服务器IP:3000就到了登录界面,使用默 认的admin用户,admin密码就可以登陆了
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/grafana-2020082421)
-
 ## ③ 配置grafana 
 
 下面我们把prometheus服务器收集的数据做为一个数据源添加到 grafana,让grafana可以得到prometheus的数据。
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/grafana-2020082422)
-
  
-
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/grafana-2020082423)
-
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/grafana-2020082424)
 
 a  为添加好的数据源做图形显示
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/grafana-2020082425)
-
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/grafana-2020082426)
-
  
-
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/grafana-2020082427)
-
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/grafana-2020082428)
 
 b 保存
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/grafana-2020082429)
+
 
 c 最后在dashboard可以查看到
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/grafana-2020082430)
-
 d 匹配条件显示
-
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/grafana-2020082431)
 
 
 
@@ -334,11 +274,11 @@ e  配置grafana-node_exporter仪表版
 
 - 导入Prometheus仪表版，Dashboards–Manage–import
 - 在 Granfana.com-Dashboard中填写8919，点击load即可。（https://grafana.com/dashboards 中可以直接搜索prometheus，copy ID to Clipboard，grafana官网提供了大量的仪表板模板可以使用）
-  ![在这里插入图片描述](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/20190613123249866.png)
+  
 
 **·**    进入仪表板就可以在仪表版看到相应的监控
 
-![image-20201012114748900](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/image-20201012114748900.png)
+
 
 # 3、Altermanager监控告警
 
@@ -366,7 +306,7 @@ firing：已触发阈值且满足告警持续时间
 
 举一个例子，阈值告警的配置如下：
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/webp) 
+
 
 **·** 收集到的mysql_uptime>=30,告警状态为inactive
 
@@ -403,13 +343,13 @@ vim /usr/local/alertmanager/altermanager.yml  # altermanager配置邮箱，如�
 nohup ./alertmanager --config.file=alertmanager.yml  &  # 根据配置启动altermanager
 ```
 
-![image-20201012112139706](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/image-20201012112139706.png)
+
 
 ## ④、修改prometheus配置文件
 
 #vim prometheus/prometheus.yml
 
-![image-20201012113017338](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/image-20201012113017338.png)
+
 
   
 
@@ -535,14 +475,12 @@ systemctl restart prometheus
 
 访问http://loalhost:9090/alerts ，即可查看规则
 
-![image-20201012113913071](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/image-20201012113913071.png)
-
 
 
 ## ⑦、查看报错邮件
 
 报警邮件如下：
-![image-20201012114029075](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/image-20201012114029075.png)
+
 
 
 
@@ -623,7 +561,7 @@ procs_running 1
 
 Pushgateway是prometheus的一个重要组件，利用该组件可以实现自动以监控指标，从字面意思来看，该部件不是将数据push到prometheus，而是作为一个中间组件收集外部push来的数据指标，prometheus会定时从pushgateway上pull数据。
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/1489604-20190629141707811-1292572935.png)
+
 
 　　pushgateway并不是将Prometheus的pull改成了push，它只是允许用户向他推送指标信息，并记录。而Prometheus每次从 pushgateway拉取的数据并不是期间用户推送上来的所有数据，而是client端最后一次push上来的数据。因此需设置client端向pushgateway端push数据的时间小于等于prometheus去pull数据的时间，这样一来可以保证prometheus的数据是最新的。
 
@@ -651,11 +589,11 @@ cd .. ; mv pushgateway-1.2.0   pushgateway
 
 配置prometheus发现pushgateway 规则如下
 
-![image-20201012152507236](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/image-20201012152507236.png)
+
 
 重启prometheus ：systemctl restart prometheus  登陆web UI，查看prometheus的targets
 
-![image-20201012152849243](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/image-20201012152849243.png)
+
 
 **测试**
 
@@ -680,8 +618,6 @@ JOBNAME：job标签的值
 
 　　登陆prometheus webUI查询指标是否生成
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/1489604-20190629143811236-1274118754.png)
-
 **pushgateway发送数据的API格式**
 
 API格式：
@@ -695,7 +631,7 @@ API格式：
 　　　　/testjob/yyy/pushgateway1
 **　　分别触发上述三个API，打开pushgateway的web UI
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/1489604-20190629144737955-1211416005.png)
+
 
 ### 发送的数据类型
 
@@ -793,7 +729,7 @@ if __name__ == "__main__":
 
 结果：　
 
-　[![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/1489604-20190629151825095-1903045889.png)](https://img2018.cnblogs.com/blog/1489604/201906/1489604-20190629151825095-1903045889.png)
+
 
 2、gauage类型
 
@@ -827,7 +763,7 @@ app.run(host="0.0.0.0")
 
 结果：　
 
-　![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/1489604-20190629152044160-1236542689.png)
+
 
 以上作用是在本地生成一个小型网站，下一步是将选定的数据发送到pushgateway 
 
@@ -872,7 +808,7 @@ requests.post("http://pushgatewayIP:9091/metrics/job/python/",data=prometheus_cl
 
 　结果：
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/1489604-20190629152327729-387707060.png)
+
 
 ## prometheus自带查询指标定义解析（节选）
 
@@ -1000,7 +936,7 @@ tomcat_threads_current_threads：tomcat线程当前线程数
 
 上传mysqld_exporter组件
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/2020082411.png)
+
 
 ### 1、安装mysqld_exporter组件
 
@@ -1010,7 +946,7 @@ mv /usr/local/mysqld_exporter-0.11.0.linux-amd64/  /usr/local/mysqld_exporter
 ls /usr/local/mysqld_exporter
 ```
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/2020082412)
+
 
 ### 3、安装mariadb数据库,并授权
 
@@ -1035,7 +971,7 @@ MariaDB [(none)]> flush privileges;
 MariaDB [(none)]> quit
 ```
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/2020082413)
+
 
 创建一个mariadb配置文件，写上连接的用户名与密码(和上面的授权的用户名 和密码要对应)
 
@@ -1049,7 +985,7 @@ user=mysql_monitor
 password=123
 ```
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/2020082414)
+
 
 ### 3、启动mysqld_exporter
 
@@ -1059,7 +995,7 @@ nohup /usr/local/mysqld_exporter/mysqld_exporter --config.my.cnf=/usr/local/mysq
 
 确认端口(9104)
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/2020082415)
+
 
  回到prometheus服务器的配置文件里添加被监控的mariadb的配置段
 
@@ -1077,7 +1013,7 @@ vim /usr/local/prometheus/prometheus.yml
 
 
 
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/2020082416)
+
 
 ```
 - job_name: 'agent1_mariadb'  # 取一个job 名称来代表被监控的mariadb   
@@ -1088,12 +1024,6 @@ vim /usr/local/prometheus/prometheus.yml
 改完配置文件后,重启服务
 
 回到web管理界面 --》点Status --》点Targets --》可以看到监控 mariadb了
-
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/2020082417)
-
- 
-
-![img](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/2020082418)
 
 
 
@@ -1191,7 +1121,7 @@ JAVA_OPTS="-javaagent:/tmp/tomcat/bin/jmx_prometheus_javaagent-0.3.1.jar=30013:/
 
 
 
-![1598341359674](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/1598341359674.png)
+
 
 
 
@@ -1210,7 +1140,7 @@ JAVA_OPTS="-javaagent:/tmp/tomcat/bin/jmx_prometheus_javaagent-0.3.1.jar=30013:/
 
 浏览器访问prometheus_server <http://10.10.16.41:9090/targets> 
 
-![1598341696724](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/1598341696724.png)
+
 
 ### 6、导入grafana模板8563
 
@@ -1218,11 +1148,11 @@ JAVA_OPTS="-javaagent:/tmp/tomcat/bin/jmx_prometheus_javaagent-0.3.1.jar=30013:/
 
 结果如下：
 
-![1598342244643](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/1598342244643.png)
+
 
 https://grafana.com/dashboards/3457模板也不错，需手动输入instance 
 
-![1598344014430](prometheus%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8.assets/1598344014430.png)
+
 
 
 
